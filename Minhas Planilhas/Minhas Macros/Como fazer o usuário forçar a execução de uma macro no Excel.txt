@@ -1,0 +1,103 @@
+Como fazer o usuário forçar a execução de uma macro no Excel
+
+Já aprendemos aqui no site como criar diversas funções e rotinas para nossas planilhas 
+através do VBA, porém, 
+como nem tudo é perfeito, há sempre uma possível "falha" nas nossas criações.
+Funciona assim: Como as VBAs podem conter códigos maliciosos, o Windows, por segurança, 
+as mantém 
+bloqueadas até que o usuário as habilite. Isso pode ser muito ruim, pois imagine a situação: 
+Você faz uma planilha com a macro que proíbe a cópia de conteúdo, afinal, possui dados que 
+você não quer 
+que sejam distribuídos por aí, mas, o usuário não ativa as macros, e, com isso, pode copiar
+ o que quiser. 
+Não serviu de nada a VBA, certo? Por isso vamos aprender hoje como "forçar" que ele ative 
+as macros. Vamos lá:
+Primeiramente vamos criar uma tela de aviso ao usuário. Fizemos a seguinte tela para o 
+nosso exemplo, você pode reproduzi-la ou criar a sua própria.
+
+Legal, certo? É preciso dar todas as instruções aos usuários, não se esqueça que nem sempre
+ eles têm o mesmo conhecimento 
+do que eu ou você e sabe determinado comando. A próxima parte será criar a planilha em que
+ você irá inserir as informações que quer aos usuários.
+Para criar uma planilha é só clicar no símbolo de + na barra de tarefas.
+Com a Plan 2 criada, adicione os dados normalmente que você quer exibir, sejam eles números,
+ fórmulas, imagens, gráficos, tabelas, etc. 
+Para finalizar você terá que fazer um passo muito importante: Ocultar essa planilha de dados
+ que acabou de criar. Para isso clique com o 
+direito e clique em "Ocultar".
+Bom, mas ainda não estamos totalmente seguros, certo? Afinal o usuário poderia fazer o 
+caminho inverso e clicar em "re-exibir" e pronto, 
+lá se ia nossa segurança. Para isso faremos o seguinte: Vá até a guia "Revisão" e clique em
+ "Proteger Pasta de Trabalho", deixe o campo 
+"Estrutura" marcado e insira uma senha. No nosso caso eu colocarei "1234".O próximo passo 
+será adicionar o código VBA. 
+Para isso vá na área de edição de códigos, através do Alt + f11, por exemplo, e dê um duplo 
+clique em "EstaPastaDeTrabalho". 
+Na nova janela que for exibida é só adicionar o código
+
+Private Sub Workbook_Open()   
+     
+     ActiveWorkbook.Unprotect "1234"
+     Sheets("Plan2").Visible = True
+            
+End Sub
+
+Repare que se a sua senha for outra combinação que não o "1234" você terá de fazer a 
+substituição no código VBA.
+
+Mas está tudo pronto?? Ainda não. Pense comigo: Se você aplicar os passos acima e forçar o 
+usuário a aceitar as macros e 
+tudo mais ainda assim será fácil de burlar. Após as planilhas estarem vísiveis é só dar um 
+Ctrl + C no arquivo e um Ctrl + V 
+para fazer uma cópia com tudo sendo exibido, ou seja, nosso plano de segurança foi por água
+ abaixo.
+ A saída neste caso é bem simples: Reverter o processo que fizemos ao abrir o arquivo, em 
+outras palavras, 
+esconder novamente as planilhas no momento do fechamento. E para garantir que elas sejam
+ ocultadas e evitar falhas por 
+conta de esquecimentos ou outras coisas do tipo vamos usar novamente o VBA.
+No mesmo local de antes, logo abaixo do código anterior você colará as seguintes linhas:
+
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+
+Sheets("Plan2").Visible = False
+ActiveWorkbook.Protect "1234"
+ThisWorkbook.Save
+
+End Sub
+
+Explicando o código acima: Primeiramente você ocultará as planilhas que devem ser sigilosas
+ com o atributo "Visible = False", 
+tantas quantas forem necessárias. Depois aplicamos a senha novamente para que o próximo que
+ abrir o documento não tenha como 
+abrir sem aceitar as macros e por fim salvamos o arquivo para garantir que as planilhas que
+ foram bloqueadas sejam salvas neste formato.
+Assim mesmo que seja feita uma cópia quando o arquivo estiver aberto e totalmente visível,
+ quando o arquivo versão cópia for aberto 
+o mesmo processo de aceitar as macros deverá ser feito ou nada além da tela inicial será 
+exibido.
+
+Atente apenas aos nomes: Se a sua planilha de dados se chamar, por exemplo, "dados" ou 
+"relatório", o código deverá ser 
+Sheets("dados").Visible = True e assim por diante. Não há limites para o número de planilhas
+ que podem ser ocultas ou exibidas.
+Por fim é só você acessar esta aula e aprender como bloquear seus códigos VBA, afinal, até
+ aqui não protegemos a edição das 
+macros e qualquer um que apertar o atalho alt + f11 poderia fazer um estrago em nossa 
+segurança. Dê uma olhadinha no post, são apenas 2 passos.
+Agora sim. Com tudo pronto o próximo passo é fechar a janela de edição e salvar o arquivo 
+como uma Pasta de Trabalho Habilitada para Macro do Excel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+
+
+
+1. No Módulo:
+
+
+'Sub que irá obter o nome do UserForm (ObjForm) que receberá a altura e a largura do Excel
+Sub Maximizar(ObjForm As Object)
+
+'A Altura do UserForm(ObjForm) irá receber a altura do Excel menos 18 pontos
+ObjForm.Height = Application.Height - 18
+
+'A Largura do UserForm(ObjForm) irá receber a largura do Excel
+ObjForm.Width = Application.UsableWidth
+
+End Sub
+------------------------------------------------------------------------------------------
+
+2. No UserForm:
+
+Private Sub UseForm_Initialize()
+
+'Chama a sub Maximizar que contém os atributos para maximizar o UserForm1
+Call Maximizar(Me)
+
+End Sub
+
+------------------------------------------------------------------------------------------
+
+3.Na EstaPasta_de_trabalho.
+
+
+Private Sub Workbook_Open()
+
+
+'Força a Maximização do Excel
+Application.WindowState = xlMaximized
+
+'Exibe o UserForm1
+UserForm1.Show
+
+End Sub
+'Caso você queira deixar o Excel em fullscreen ao invés de maximizado basta trocar o comando Application.WindowState=xlMaximmized por Application.DisplayFullScreen = True.
+
+
+
+16. Pronto! O UserForm já inicializará Maximizado.

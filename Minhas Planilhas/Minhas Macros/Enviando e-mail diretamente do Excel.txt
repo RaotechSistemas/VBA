@@ -1,0 +1,68 @@
+Enviando e-mail diretamente do Excel
+
+Sempre digo que o Excel não para de nos surpreender, pois sempre aprendemos algo que nem mesmo imaginávamos ser possível como, 
+por exemplo, mandar e-mail diretamente do Excel. E digo mais: Diretamente MESMO, sem uso de Outlook ou qualquer outra 
+ferramenta que não mesmo o próprio Excel.
+E antes que você se pergunte um exemplo de aplicação desta técnica, clique aqui e confira uma planilha de backup 
+local que é enviada diretamente para seu e-mail. Um outro exemplo é uma planilha de mailing que você pode conferir aqui.
+O primeiro passo caso você deseje enviar e-mail pelo seu Excel é ir até 'Ferramentas', depois 'Referências' e adicionar a 
+biblioteca 'Microsoft CDO for Windows 2000 Library'. Marque e dê o OK.
+Depois insira um módulo e cole o seguinte código:
+
+Function EnviaEmail()
+
+Dim iMsg, iConf, Flds
+Set iMsg = CreateObject("CDO.Message")
+Set iConf = CreateObject("CDO.Configuration")
+Set Flds = iConf.Fields
+
+ schema = "http://schemas.microsoft.com/cdo/configuration/"
+ Flds.Item(schema & "sendusing") = 2
+ 'Configura o smtp
+ Flds.Item(schema & "smtpserver") = "smtp.gmail.com"
+ 'Configura a porta de envio de email
+ Flds.Item(schema & "smtpserverport") = 465
+ Flds.Item(schema & "smtpauthenticate") = 1
+ 'Configura o email do remetente
+ Flds.Item(schema & "sendusername") = "maximilianomeyer48@gmail.com"
+ 'Configura a senha do email remetente
+ Flds.Item(schema & "sendpassword") = "senha do seu e-mail"
+ Flds.Item(schema & "smtpusessl") = 1
+ Flds.Update
+
+With iMsg
+   'Email do destinatário
+   .To = "max@desenvolveweb.com.br"
+   'Seu email
+   .From = "exemplo@gmail.com"
+   'Título do email
+   .Subject = "Isto é um teste de Envio de e-mail"
+   'Mensagem do e-mail, você pode enviar formatado em HTML
+   .HTMLBody = "Mensagem enviada com o gmail"
+   'Seu nome ou apelido
+   .Sender = "Teste"
+   'Nome da sua organização
+   .Organization = "Aprender Excel"
+   'e-mail de responder para
+   .ReplyTo = "maximilianomeyer48@gmail.com"
+   'Anexo a ser enviado na mensagem. Retire a aspa da linha abaixo e coloque o endereço do arquivo
+   .AddAttachment ("c:/fatura.txt")
+   Set .Configuration = iConf
+   .Send
+End With
+
+Set iMsg = Nothing
+Set iConf = Nothing
+Set Flds = Nothing
+
+End Function
+
+Sub disparar()
+
+   EnviaEmail
+   MsgBox "O e-mail foi disparado com sucesso!", vbOKOnly, "e-mail enviado"
+
+End Sub
+
+Mas é sério, esse tutorial é um dos que mais possuem detalhes para que tudo funcione do jeito pretendido. 
+Então confira o link original do post. http://www.aprenderexcel.com.br/2017/vba/enviando-e-mail-diretamente-pelo-excel

@@ -1,0 +1,319 @@
+'Tela Cheia -----------------------------------------------------------------
+
+Private Sub Workbook_Open()
+
+Application.DisplayFullScreen = True
+
+End Sub
+
+
+'Desabilita Movimento da Tela -----------------------------------------------
+
+Private Sub Rotina()
+
+Application.ScreenUpdating = False
+
+'---Macro Gravada
+
+Application.ScreenUpdating = False
+
+End Sub
+
+
+'Selecionar Planilha na Abertura do Arquivo----------------------------------
+
+Private Sub Workbook_Open()
+
+Planilha1.Select '---Seleciona pelo Nome da planilha
+
+Sheets("Procv").Select '---Seleciona pelo Nome da Guia
+
+Sheets(1).Select '---Seleciona pela sequencia da guia
+
+End Sub
+
+
+'Salva o arquivo-------------------------------------------------------------
+
+Private Sub Rotina()
+
+ActiveWorkbook.Save
+
+End Sub
+
+
+'Proteger e Desproteger Arquivo----------------------------------------------
+
+Private Sub Rotina()
+
+Planilha1.Unprotect "senha" '---Desprotege a planilha
+
+
+
+Planilha1.Protect "senha" '---Protege a planilha
+
+End sub
+
+
+
+ActiveSheet.Protect "senha" '---Protege a planilha ativa/selecionada
+
+Sheets("Procv").Protect "senha" '---Protege a planilha ativa/selecionada
+
+
+'Mensagem--------------------------------------------------------------------
+
+Private Sub Rotina()
+
+ActiveSheet.Unprotect "1"
+
+MsgBox ("Texto do corpo da mensagem")
+
+End Sub
+
+------------------------------------------------------------------------------
+
+Execute uma macro quando abrir a planilha
+
+Sub Auto_Open()
+MsgBox “Para saber tudo sobre Excel, acesse www.https://luz.vc/”
+End Sub
+
+-----------------------------------------------------------------------------
+
+Planilha com data e hora atual
+
+Sub escreverDataEHora()
+Range(“A1”) = Now
+End Sub
+--------------------------------------------------------------------------------
+4) Execute a mesma ação em cada célula selecionada
+Em algum momento  você precisara executar uma ação nas células que 
+foram selecionadas pelo usuário. Para isso crie uma macro igual o exemplo abaixo.
+
+Sub fazerAlgoACadaCelula()
+For Each cell In Selection.Cells
+MsgBox cell
+Next
+End Sub
+-------------------------------------------------------------------------------
+5) A mesma coisa em todas as células selecionadas
+Você pode fazer a mesma macro anterior mas de forma um pouco mais 
+abrangente, ou seja a ação não será realizada em etapas. 
+O exemplo abaixo escreve “Olá” em todas as células.
+
+Sub fazerAlgoATodasAsCelulas()
+Selection.Cells.Value = “Olá”
+End Sub
+--------------------------------------------------------------------------------
+6) Identificando formulas dentro de cada celula
+É altamente recomendável  verificar se existe algo dentro da célula,  
+sempre que uma modificação na célula seja necessário. Nesse exemplo 
+verificaremos se existe alguma formula na célula em questão.
+
+Sub verificarFormula()
+If Range(“A1”).HasFormula = True Then
+MsgBox “Existe Formula”
+Else
+MsgBox “Não é uma Formula”
+End If
+End Sub
+---------------------------------------------------------------------------------
+7) Mudar cor da célula ao passar o mouse
+Você também pode querer proporcionar mais interatividade com os usuários da planilha. 
+O ideal é que a interatividade tenha o objetivo de facilitar o serviço e visualização 
+das informações. A macro abaixo é um exemplo de como você pode fazer com que sua tabela 
+apresente células com o mesmo tom de cor sempre que o mouse passar por um dado que correlacione essas células.
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+Dim LinhaInicio As Range
+Dim Linha As Range
+Dim Linha2 As Long
+Cells.Interior.ColorIndex = xlNone
+Linha2 = Target.Row
+Set LinhaInicio = Range(“A” & Linha2, Target)
+‘Pinta da celula selecionada até a coluna 5
+Set Linha = Range(Cells(Target.Row, 1), Cells(Target.Row, 5))
+With Linha
+.Interior.ColorIndex = 12
+End With
+End Sub
+------------------------------------------------------------------------------------
+8) Mudando a cor do interior e das fontes
+Esta macro , altera as cores no interior e na fonte das células, de acordo com a letra das células.
+
+Sub Colorir_fonte_interior_letra()
+For N = 1 To Range(“O65536”).End(xlUp).Row
+Select Case Range(“O” & N)
+Case “A”
+Range(“O” & N).Interior.ColorIndex = 3
+Range(“O” & N).Font.ColorIndex = 1
+Case “B”
+Range(“O” & N).Interior.ColorIndex = 4
+Range(“O” & N).Font.ColorIndex = 2
+Case “C”
+Range(“O” & N).Interior.ColorIndex = 5
+Range(“O” & N).Font.ColorIndex = 3
+Case “D”
+Range(“O” & N).Interior.ColorIndex = 7
+Range(“O” & N).Font.ColorIndex = 12
+Case Else
+Range(“O” & N).Interior.ColorIndex = 6
+Range(“O” & N).Font.ColorIndex = 4
+End Select
+Next N
+End Sub
+----------------------------------------------------------------------------------
+9) Macro que fala
+Já pensou que interessante ter uma planilha que fala os dados contidos nela, 
+é exatamente isso que essa macro faz. No exemplo abaixo a planilha possuía palavras 
+que iam da célula A1 até a A5, mas você pode escolher o intervalo que achar mais conveniente, 
+para isso basta alterar o A1:A5 presentes no código abaixo, pelo intervalo que preferir.
+
+Sub ExcelFalando()
+Range(“A1:A5”).Speak
+End Sub
+------------------------------------------------------------------------------------
+Criar nova planilha ativa
+Criar nova planilha colando os dados com formatação e dados, sem considerar as fórmulas em uma nova planilha.
+O procedimento VBA deste post serve para copiar a planilha ativa e colar somente valores e formatação 
+em uma nova planilha, podendo assim esta nova planilha ser enviada por email, etc.
+Abaixo o código comentado:
+
+Sub lsCopiaPlanilhaAtiva()
+    Dim lPlanilha As String
+    Dim lNome As String
+    Dim lNovaPlanilha As String
+
+    'Nome do arquivo aberto
+    lPlanilha = ActiveWorkbook.Name
+    'Nome da planilha aberta
+    lNome = ActiveSheet.Name
+
+    'Copia as planilhas
+    Sheets(lNome).Select
+    Sheets(lNome).Copy
+
+    'Nome da nova planiliha
+    lNovaPlanilha = ActiveWorkbook.Name
+
+    'Copia e cola os dados da nova planilha
+    Windows(lPlanilha).Activate
+    Cells.Select
+    Selection.Copy
+    Windows(lNovaPlanilha).Activate
+    Cells.Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Range("A1").Select
+    Windows(lPlanilha).Activate
+    Range("A1").Select
+End Sub
+-------------------------------------------------------------------------------------
+Macro Ocultar de linhas
+
+Sub OcultarLinhas()
+Dim i As Long
+Dim iQuantidadeLinhas As Long
+Dim iLinhaInicial As Long
+Dim iLinhaFinal As Long
+iQuantidadeLinhas = ActiveSheet.Range(“A2”).Value
+iLinhaInicial = 3
+iLinhaFinal = iLinhaInicial + iQuantidadeLinhas – 1
+For i = iLinhaFinal To iLinhaInicial Step -1
+ActiveSheet.Cells(i, 1).EntireRow.Hide
+Next i
+End Sub
+O loop tem que começar das linhas mais abaixo para as primeiras, ok. 
+Porque se fizermos ao contrário, quando, por exemplo, ocultarmos a linha 1, 
+a linha 2 será a nova linha 1 e nossa macro estará programada para ocultar a linha 2, 
+ou seja, a próxima linha no loop. Com isso, o conteúdo da linha 2 não seria ocultada.
+Faça um teste e você perceberá a diferença.
+Perceba que para fazer um loop inverso, você precisa usar o comando Step -1.
+Abç
+-----------------------------------------------------------------------------------------
+Imprimir Seleção
+
+Digite o seguinte código:
+Sheets (“plan1”).select
+ActiveWindow.SelectedSheets.PrintPreview
+Explicando:
+Sheets (“plan1”).select (Selecione a planilha1, aqui você coloca sua planilha)
+ActiveWindow.SelectedSheets.PrintPreview (Ative a janela e com a planilha selecione, visualize a impressão)
+-----------------------------------------------------------------------------------------
+Barra de progresso 01
+
+Sub BarraDeProgresso()
+Dim i               As Long
+Dim iUltimaLinha    As Long
+Dim sStatusProcesso As String
+    iUltimaLinha = ActiveSheet.Range("A1").End(xlDown).Row
+    sStatusProcesso = "Aguarde... O sistema está processando as informações. "
+    Application.StatusBar = sStatusProcesso
+    For i = 2 To iUltimaLinha
+        Application.StatusBar = sStatusProcesso & Format(i / iUltimaLinha, "0.0%") & " Concluído"
+        ' O código da sua macro vai aqui
+        Call MinhaMacro(ActiveSheet.Cells(i, 1))
+    Next
+    Application.StatusBar = False
+    MsgBox "Processo concluído.", vbInformation, "Excel do Seu Jeito"
+End Sub
+
+-----------------------------------------------------------------------------------------
+Barra de Prgresso 02
+
+Primeiramente, vou definir o que vamos precisar para a construção dessa macro.
+ 
+1 Userform que vamos alterar seu nome para “frmBarraDeProgresso”;
+1 Label que vamos nomeá-lo “progressBar”;
+1 Frame que terá sua propriedade Name alterada para “framePb”;
+1 Módulo global onde vamos escrever nossa macro.
+ 
+Para iniciar a tela do VBA, use o atalho ALT+F11.
+ 
+Configurando o formulário
+ 
+Insira um formulário ao projeto (Inserir > UserForm) e altere sua propriedade Name para frmBarraDeProgresso.
+ 
+Coloque o controle Frame e altere suas propriedades abaixo:
+Name = framePb;
+Caption = 0%;
+SpecialEffect = 2;
+ 
+Coloque o controle Label dentro do framePb e mude suas propriedades a seguir:
+Name = progressBar;
+Caption = (deixe em branco);
+SpecialEffect = 1;
+Height = 15;
+Width = 5;
+ 
+Ajuste o tamanho do formulário e do framePb conforme desejar, de maneira que se aproxime do modelo mostrado aqui na figura 1.
+ 
+Configurando o código que será executado
+Configurando o código da Barra de Progresso
+ 
+Esse é o código que executa a chamada do formulário frmBarraDeProgresso e implementa toda a rotina de análise do andamento do processo. 
+Esse código também deve ser escrito no Módulo1.
+ 
+Sub BarraDeProgresso()
+Dim i               As Long
+Dim iUltimaLinha    As Long
+Dim iPercentualConcluido As Double
+    Application.ScreenUpdating = False
+    iUltimaLinha = ActiveSheet.Range("A1").End(xlDown).Row
+    frmBarraDeProgresso.Show False
+    For i = 2 To iUltimaLinha
+        iPercentualConcluido = i / iUltimaLinha
+        With frmBarraDeProgresso
+            .framePb.Caption = Format(iPercentualConcluido, "0%") & " Concluído"
+            .progressBar.Width = iPercentualConcluido * (.framePb.Width - 10)
+        End With
+        DoEvents    'Permite que sejam visualizadas as mudanças nos controles do formulário
+        ' O código da sua macro vai aqui
+        Call MinhaMacro(ActiveSheet.Cells(i, 1))
+    Next
+    Unload frmBarraDeProgresso
+    MsgBox "Processo concluído.", vbInformation, "Excel do Seu Jeito"
+End Sub

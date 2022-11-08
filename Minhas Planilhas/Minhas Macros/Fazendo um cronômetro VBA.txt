@@ -1,0 +1,41 @@
+Fazendo um cronômetro VBA
+Precisa controlar alguma tarefa com precisão? 
+Precisar criar uma planilha que necessita medir o tempo empregado? 
+Pois esse cronômetro em VBA vai resolver todos os seus problemas. 
+No módulo você irá inserir:
+
+Sub iniciar_crono()
+
+      If Plan1.Buttons(1).Text = "Stop" Then
+
+                 If Range("j4").Value = "" Then
+                     Range("j4").Value = Time
+                     Range("l3").Select
+                     Selection.Copy
+                     Range("k4").Select
+                     ActiveSheet.Paste
+                     Range("k4").Formula = "=j4-i4"
+                  Else
+                     Range("j3").End(xlDown).Offset(1, 0).Value = Time
+                     Range("k3").End(xlDown).Select
+                     Selection.Copy
+                     Selection.Offset(1, 0).Select
+                     ActiveSheet.Paste
+
+                 End If
+
+                 Plan1.Buttons(1).Text = "Start"
+     Else
+                 If Range("i4").Value = "" Then
+                     Range("i4").Value = Time
+                 Else
+                     Range("i3").End(xlDown).Offset(1, 0).Value = Time
+                 End If
+
+                 Plan1.Buttons(1).Text = "Stop"
+
+     End If
+
+End Sub
+
+

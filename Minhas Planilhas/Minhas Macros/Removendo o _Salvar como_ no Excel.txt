@@ -1,0 +1,28 @@
+Removendo o 'Salvar como' no Excel
+
+Por vezes criamos um projeto, compartilhamos com os demais colegas e funcionários na rede da empresa, porém, 
+não queremos que eles possam criar uma cópia do arquivo, ou seja, usar o famoso ‘Salvar como" e adicionarem à sua máquina, 
+trocar nome, mudar o local, etc.
+A razão disso pode ser segurança, pode ser para que não tenham dados desencontrados, para que não tenham diferentes 
+versões rodando pelo escritório, etc. O importante é que será facinho, com algumas linhas de código VBA, desabilitar 
+essa função, permitindo assim, a edição apenas na tabela mestre, ou seja, tudo ficará centralizado naquela que você compartilhar com todos.
+Para isso vamos usar uma simples rotina no VBA. Começando: Após abrir o sistema de edição de VBA’s 
+(aprenda aqui como, caso não saiba) e dê um duplo clique em "EstaPasta_de_Trabalho" e uma nova janela será aberta. 
+Será nela que vamos colocar o código.Nessa janela vamos inserir o seguinte código:
+
+Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
+   If SaveAsUI = True Then
+     Cancel = True
+     Application.EnableEvents = False
+     ThisWorkbook.Save
+             MsgBox "A Opção 'Salvar Como' está desabilitada!"
+      Application.EnableEvents = True
+   End If
+End Sub
+
+Veja que agora, toda vez que seu usuário tentar salvar uma cópia dessa planilha, a seguinte mensagem será exibida:
+
+Pronto, agora seu arquivo está mais seguro e desencontros serão evitados. Apenas mais uma simples, 
+porém importantíssima observação: Repare que você só deverá inserir o código após estar com a planilha no local correto, 
+por exemplo, senão, nem mesmo você poderá usar o "Salvar Como", ok?
+Finalizando: Não esqueça de salvar o arquivo como "Habilitado para Macro", ok? Senão não funcionará.

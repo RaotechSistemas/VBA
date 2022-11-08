@@ -1,0 +1,69 @@
+Como Remover o Botão Fechar do UserForm no Excel VBA
+
+
+Com o Excel aberto basta seguir o passo a passo mostrado abaixo:
+
+1. Dentro do Módulo1 que foi criado coloque o seguinte código:
+
+'Função que retornará um identificador para o UserForm que possui o nome da classe e o nome do UserForm
+Private Declare PtrSafe Function FindWindowA Lib "User32" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+
+'Função que recupera as informações sobre o nome da classe e o estilo da janela do UserForm
+Private Declare PtrSafe Function GetWindowLongA Lib "User32" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
+
+'Função que altera o estilo da janela do UserForm
+Private Declare PtrSafe Function SetWindowLongA Lib "User32" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+
+'Função que redesenha a barra de título do UserForm
+Private Declare PtrSafe Function DrawMenuBar Lib "User32" (ByVal hWnd As Long) As Long
+
+Sub RemoveBotao(ObjForm As Object)
+
+    'Código que remove o botão Fechar do UserForm
+    SetWindowLongA FindWindowA("ThunderDFrame", ObjForm.Caption), -16, GetWindowLongA(FindWindowA("ThunderDFrame", ObjForm.Caption), -16) And &HFFF7FFFF 
+
+    'Código que atualiza a barra de título do UserForm sem o botão Fechar
+    DrawMenuBar FindWindowA("ThunderDFrame", ObjForm.Caption) 
+
+End Sub
+
+Obs.: Caso você esteja usando o Excel versão 32bits remova o atributo PtrSafe das funções Private Declare PtrSafe Function....
+
+2. Dentro da sub Private Sub CommandButton1_Click() ... End Sub insira o seguinte código:
+
+Selecionar Código
+
+Private Sub CommandButton1_Click()
+
+
+    'Fecha o UserForm
+    Unload Me
+
+End Sub
+
+4.Dentro da sub Private Sub UserForm_Initialize() ... End Sub insira o seguinte código:
+
+Selecionar Código
+
+Private Sub UseForm_Initialize()
+
+
+    'Código que chama a sub que irá remover o botão Fechar do UserForm ao ser inicializado
+    Call RemoveBotao(Me)
+
+
+5. Dentro da sub Private Sub Workbook_Open () ... End Sub insira o seguinte código:
+
+Selecionar Código
+
+Private Sub Workbook_Open()
+
+
+    'Força a Maximização do Excel ao ser inicializado
+    Application.WindowState = xlMaximized
+
+    'Exibe o UserForm1
+    UserForm1.Show
+
+End Sub
+Dica: Caso você queira deixar o Excel em fullscreen (tela cheia) ao invés de maximizado ao ser aberto, basta trocar o comando Application.WindowState=xlMaximmized por Application.DisplayFullScreen = True.

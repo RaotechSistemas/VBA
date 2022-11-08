@@ -1,0 +1,179 @@
+90 dicas para arrasar no Excel
+
+1. Mova para a primeira célula em uma seqüência utilizando a tecla Home e pressione Ctrl + Home para mover à célula A1.
+
+2. Utilize a AutoCorreção para substituir uma tecla chave por um texto que digita freqüentemente. Escolha Ferramentas, AutoCorreção para configurar.
+
+3. Para entrar com uma série de dias da semana, digite a primeira data em uma célula e então arraste o preenchimento utilizando o botão direito do mouse e escolha Preencher dias da semana do menu de atalhos.
+
+4. Quando quiser entrar um numero como uma entrada de texto, utilize um único apostrofo ' antes. Nunca faça isso com um número que deseja utilizar em um cálculo.
+
+5. Coloque a data na célula atual pressionando as teclas Ctrl + : e o tempo pressionando Ctrl + ;.
+
+6. Esconda uma coluna dando um clique com o botão direito na letra da coluna e escolhendo Ocultar.
+
+7. Esconda uma planilha fazendo dela a planilha atual e selecionando Formatar, Planilha, Ocultar.
+
+8. Revele uma coluna oculta selecionando colunas em ambos os lados dela, dando um clique com o botão direito e escolhendo Revelar.
+9. Crie uma constante para utilizar em seus cálculos escolhendo Inserir, Nome, Definir. Digite um nome para a constante e entre seu valor na área Referente a.
+
+10. Utilize sua constante em uma formula ao se referir ao seu nome, por exemplo, =VATRate*23-4 (onde VATRate é o nome que deu a sua constante).
+
+11. Crie um Cálculo automático utilizando a combinação de teclas Alt + = como uma alternativa ao botão da barra de ferramentas.
+
+12. Para colar múltiplos itens no Excel 2000 ou maior, copie os itens e então escolha Exibir, Barra de ferramentas, Área de transferência. A Barra de ferramentas Área de transferência mostrará seu conteúdo - clique naqueles que deseja colar.
+
+13. Rotacione o texto em uma célula escolhendo Formatar, Célula, Alinhamento e escolha entre as opções de Orientação.
+
+14. Crie múltiplas linhas de texto em uma célula segurando as teclas Alt + Enter toda vez que precisar iniciar uma nova linha.
+
+15. Crie uma cópia da planilha segurando a teclas Ctrl conforme clique e arrasta a planilha para ela ser duplicada.
+
+16. Coloque os mesmos dados em mais de uma planilha ao mesmo tempo selecionando as planilhas (segure a tecla Shift ao clicar nelas) e então digite os dados.
+
+17. Ajuste as margens em Visualizar página clicando no botão Margens e arraste uma margem para ajustá-la.
+
+18. Remova as linhas da tela (não das impressões) utilizando Ferramentas, Opções, Exibir, caixa Desabilitar linhas.
+
+19. Encaixe uma planilha de trabalho inteira em uma única página escolhendo Arquivo, a janela Configuração de página e configurá-la para Ajustar à 1 página...
+
+20. Remova as linhas de suas impressões (Mas não da tela) escolhendo Arquivo, Configuração de página, janela Planilha, caixa Desabilitar linhas.
+
+21. Configure o número de planilhas em branco para cada livro de trabalho utilizando Ferramentas, Opções, Geral e coloque a configuração Planilhas em Novo livro de trabalho para o valor desejado.
+
+22. Calcule rapidamente os valores de uma gama de opções selecionado-a e verificando o valor na área Cálculo=n.
+
+23. Outra alternativa seria visualizar Contar, Contar números, Média, Máximo ou Mínimo de uma seleção dando um clique com o botão direito na área Cálculo=n da barra de status e selecione outro cálculo.
+24. Rapidamente crie um gráfico selecionando-o de uma gama pressionando a tecla F11.
+
+25. Feche todos os seus livros de trabalho abertos segurando a tecla Shift conforme escolhe o menu Arquivo, e então Fechar todos.
+
+26. Mova um gráfico para outro local dando um clique com o botão direito no objeto, selecionando Local e escolhendo um novo Localização para ele.
+
+27. Adicione uma série de dados a um gráfico já existente - selecione as séries então clique e arraste-as até o gráfico.
+
+28. Remova uma série de dados de um gráfico selecionando a série a remover e pressionar a tecla Delete.
+
+29. Crie uma lista personalizada escolhendo Ferramentas, Opções, janela Listas personalizadas, digite as entradas na área Lista e clique em Adicionar. Utilize-o como qualquer outra lista interna do Excel.
+
+30. Crie um gráfico de gamas não contínuo em uma planilha de trabalho segurando a tecla Ctrl ao selecionar cada uma por vez, então proceda normalmente para criar seu gráfico.
+
+31. Para entrar com uma fração em uma célula (com um 0 na frente se for entre 1 e -1). Por exemplo, você pode digitar 1 ¾, mas você precisa digitar 0 ¾ e -0 ¾ para as figuras menores.
+
+32. Organize os dados em uma planilha selecionando-os e escolhendo Dados, AutoFiltro. Tenha cuidado ao selecionar todos os dados para não organizar apenas uma coluna.
+
+33. Filtre os dados em uma planilha selecionando-a e escolhendo Dados, AutoFiltro. Agora escolha os dados a visualizar da lista próxima a coluna de cabeçalhos. Selecione Dados, Filtro, Mostrar todos para visualizar todos os dados.
+
+34. Crie um formulário de dados entrando com dados em uma lista e clicando na lista para selecionar Dados, Formulário.
+
+35. Crie uma planilha de trabalho como modelo escolhendo Arquivo, Salvar como e, da lista Salvar no formato, selecione Modelo. Utilize o modelo escolhendo Arquivo, Novo, então selecione o modelo e clique OK.
+
+36. Algumas barras de ferramentas úteis, como o barra de ferramentas Auditoria não estão disponíveis pelo menu Exibir, Auditoria, Mostrar barra de ferramentas de auditoria.
+
+37. Adicione texto a um gráfico selecionando qualquer parte sem texto do gráfico (por exemplo, uma série de dados) e então digite e uma área de texto será criada para você.
+
+38. Aumente o Zoom para visualizar uma parte de uma planilha na área de edição selecionando Seleção da lista de seleção de Zoom.
+
+39. Formate números como 2350 para aparecer como 23.50 (com o ponto decimal inserido automaticamente) escolhendo Ferramentas, Opções, janela Editar e habilite a caixa Decimal fixo e determine o número de partes decimais a serem utilizadas.
+
+40. Inicie o Excel com uma tela vazia (no lugar de um livro de trabalho em branco) adicionando /e ao atalho da área de trabalho para o Excel, para que ele leia algo como: "C:Arquivos de programasMicrosoft OfficeOfficeexcel.exe" /e
+
+41. Altere uma cor na paleta do Excel escolhendo Ferramentas, Opções, janela Cores. Selecione uma cor para alterar, clique Modificar e escolha uma cor substituta.
+
+42. Lembre-se que a divisão e multiplicação são feitas antes da soma e subtração, portanto 3+4*2 é sempre 11 e não 14. Para efetuar adição ou subtração antes, coloque o cálculo entre parênteses: (3+4)*2 = 14.
+
+43. Para copiar os dados mostrados na tabela pelo Internet Explorer, selecione a tabela no Internet Explorer clique e arraste-a para o Excel.
+
+44. Confirme se as prévias e amostras são salvas em suas planilhas de trabalho, para que as veja na caixa da Abrir arquivo - selecione Arquivo, Propriedades, janela Sumário e habilite a caixa Salvar figura de amostra.
+
+45. Abra o editor Visual Basic pressionando as teclas Alt + F11.
+
+46. Salve Macros, que possam estar disponíveis para todas as planilhas de trabalho, em seu Macro Pessoal de Livro de trabalho.
+
+47. Adicione um comentário à uma célula clicando sobre ela e escolhendo Inserir, Comentário, então digite seu texto.
+
+48. Defina a fonte padrão para todas as planilhas de trabalho escolhendo Ferramentas, Opções, Geral e configure a fonte e o tamanho desejado.
+
+49. Você pode visualizar o conteúdo de um comentário segurando seu mouse sobre a marcação na parte superior direita da célula.
+
+50. Copie uma formula rapidamente clicando na célula com a formula, então segure a tecla Ctrl, clique a arraste o preenchimento pelas células para copiá-lo.
+
+51. Vá para qualquer célula pressionando a tecla F5 - digite a referência à célula e clique OK.
+
+52. Margeie textos em uma célula clicando no botão Aumentar margens na barra de ferramentas Formatando. Escolha Diminuir Margens para desfazer.
+
+53. Pressione as teclas Alt + F8 para visualizar uma lista de macros disponíveis - escolha um deles e clique em Aplicar.
+
+54. Assimile um macro à uma tecla de atalho pressionando Alt + F8, selecionando o macro e clicando em Opções, então defina um atalho para executá-lo.
+
+55. Para imprimir apenas parte do livro de trabalho, selecione-a e escolha Arquivo, Imprimir, Seleção e OK.
+
+56. Nomeie uma gama de células selecionando-as, e então digitando um nome na caixa Nome no canto esquerdo da barra Fórmula e pressione a tecla Enter.
+
+57. Quando tiver nomeado uma gama, você pode selecioná-las selecionando seu nome da caixa Nome.
+
+58. Selecione cada célula clicando no botão na interseção da linha e da coluna.
+
+59. Adicione um hyperlink para uma AutoForma selecionando o formato, então pressionando Ctrl + K para abrir a caixa de hyperlink.
+
+60. Para ver como sua planilha de trabalho será quebrada, página por página, quando for impressa, escolha Exibir, Prévia de quebra de página.
+
+61. Mova uma planilha de trabalho de um livro de trabalho para outro mostrando ambos lado a lado, então arraste a planilha pela sua aba para o outro livro de trabalho.
+
+62. Imprima qualquer gráfico em sua própria página - selecione-o e escolha Arquivo, Imprimir.
+
+63. Adicione uma nova planilha para o livro de trabalho pressionando as teclas Shift + F11.
+
+64. Para remover dados, comentários e formatação de uma célula, selecione-a e escolha Editar, Limpar, Todos.
+
+65. Não está certo sobre qual parte do gráfico tem selecionada? Leia seu nome na caixa Nome no canto esquerdo da barra Fórmula.
+
+66. Copie dados ou uma fórmula da célula de cima pressionando as teclas Ctrl + D, então copie para a célula à esquerda pressionando as teclas Ctrl + R.
+
+67. Abra a caixa de diálogo pressionando as teclas Ctrl + 1.
+
+68. Salve um arquivo do Excel em um formato de arquivo diferente (por exemplo, Lotus 1-2-3) ao escolher o formato da lista Salvar no tipo.
+
+69. Trave os títulos de suas planilhas de trabalho colocando o indicador das células abaixo e à esquerda dos títulos escolhendo Janelas, Travar painéis.
+
+70. Se acha que devia desfazer alguma coisa, não salve seu livro de trabalho, pois ao salvá-lo limpará a lista de desfazer e desabilitará a opção.
+
+71. Clique em Moeda, nos botões Estilo porcentagem ou Estilo vírgula para aplicar o estilo desejado à célula atual.
+
+72. Outra alternativa é modificar um desses estilos escolhendo Formatar, Estilo. Selecione o estilo a ser alterado, então clique em Modificar e faça suas alterações.
+
+73. Visualize duas áreas de uma planilha de trabalho ao mesmo tempo escolhendo Dividir Janela e movendo as barras de divisão para criar as áreas de visualização.
+
+74. Arraste o mouse por uma gama de células para selecioná-las, então arraste o preenchimento devolta para remover seus conteúdos.
+
+75. Utilize a função =SUMIF para calcular uma gama de números baseados em uma única condição.
+
+76. Utilize =sumproduct(range1,range2) para multiplicar o conteúdo da gama 1 e gama 2 calculando o resultado.
+
+77. Adicione qualidade às suas planilhas de trabalho escolhendo Inserir, Figura, WordArt.
+
+78. Oculte os valores 0 (zero) em uma planilha de trabalho escolhendo Ferramentas, Opções, Exibir, na caixa Desabilitar valores zero e clique OK.
+
+79. Aumente o tamanho dos ícones de sua barra de ferramentas escolhendo Ferramentas, Personalizar, a janela Opções e habilitando a caixa Ícones grandes.
+
+80. Habilite o pacote de ferramentas de Análise para o Excel escolhendo Ferramentas, Adições, então habilite a caixa Pacote de ferramentas de Análise e espere que ela seja instalada.
+
+81. Encontre o último dia de um mês utilizando a ferramenta de Análise, a função =EOMONTH(dia, mês_ano) por exemplo, =EOMONTH("01/03/2002",1) para o último dia de março 2002.
+
+82. Aplique um sublinhamento duplo aos dados em uma célula segurando a tecla Shift conforme clica no botão Sublinhar.
+
+83. Alguns botões do Excel possuem função dupla e mudam quando você segura a tecla Shift - por exemplo, segure Shift e clique em Organizar em ordem crescente para obter uma organização em ordem decrescente.
+
+84. Obtenha ajuda com uma função clicando na célula para colocá-la e pressione as teclas Shift + F3.
+
+85. Entre com o nome de arquivo e localização do livro de trabalho atual em uma célula com a fórmula =CELL("nome do arquivo").
+
+86. Marque todas as células em branco em uma planilha de trabalho - selecione Editar, Ir para, Especial, escolha Branco e clique em OK.
+
+87. Adicione uma imagem de pano de fundo atrás de sua planilha de trabalho escolhendo Formatar, Planilha, Pano de fundo.
+
+88. Dê um clique com o botão direito sobre as ferramentas de navegação no canto inferior esquerdo de um livro de trabalho para visualizar uma lista selecionável de planilhas disponíveis.
+
+89. Restaure as barras de ferramentas ao seu estado original selecionando Exibir, Barra de ferramentas, então escolha a barra de ferramenta a restaurar e clique Restaurar.
+
+90. Encontre a raiz quadrada ou cúbica de um número aumentando o ou poder de ½ ou 1/3. Por exemplo, a raiz quadrada de 100 é 100^½.

@@ -1,0 +1,61 @@
+VBA para excluir a planilha antes ou após seu uso
+
+Mais um código voltado à segurança. 
+Quer enviar para seu amigo uma planilha que se exclua automaticamente após o uso? 
+Então é só usar este código. Detalhe: O arquivo não vai nem para a lixeira, é excluído mesmo!!
+Além disso você pode mesclar com o código anterior, onde definimos uma data de validade. 
+Por exemplo, assim que a data for atingida a planilha se exclui. Legal, não? 
+Com algumas alterações isto pode ser feito. 
+Aliás, ela já foi feita pelo pessoal do Aprender Excel e pode ser baixada gratuitamente neste endereço.
+Agora sim, vamos ao código. Ele deverá ser incluído em EstaPasta_de_trabalho:
+
+Private Sub Workbook_BeforeClose (Cancel As Boolean)
+Dim dtexp As Date
+  
+     dtexp = ("29/04/2011")
+  
+     If Date >= #1/11/2010# Then
+     If Date >= dtexp Then
+  
+     ThisWorkbook.Saved = True
+  
+'personalize a mensagem na linha abaixo
+     MsgBox "Este arquivo se autoexcluirá pois você só tem direito à 1 execução"         
+  
+     ThisWorkbook.ChangeFileAccess xlReadOnly
+  
+     Kill ThisWorkbook.FullName
+          
+     End If
+     End If
+  
+End Sub
+
+Mas e se você quer um código que garante que a planilha não poderá ser aberta após a data limite 
+ter sido alcançada e que se exclua na tentativa de abertura? Ou seja a planilha nem será visualizada, 
+pois vai sumir ANTES de ser aberta e exibida.
+Neste caso é só colar o seguinte código em EstaPasta_de_trabalho
+
+Private Sub Workbook_Open()
+Dim dtexp As Date
+  
+'Escolha a data que deverá expirar
+     dtexp = ("29/04/2011")
+  
+     If Date >= #1/11/2010# Then
+     If Date >= dtexp Then
+  
+     ThisWorkbook.Saved = True
+  
+'personalize a mensagem na linha abaixo
+     MsgBox "Este arquivo está expirado, se autoexcluirá!"         
+  
+     ThisWorkbook.ChangeFileAccess xlReadOnly
+  
+     Kill ThisWorkbook.FullName
+     ThisWorkbook.Close
+          
+     End If
+     End If
+  
+End Sub

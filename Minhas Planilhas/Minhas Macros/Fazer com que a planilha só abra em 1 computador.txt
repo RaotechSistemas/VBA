@@ -1,0 +1,23 @@
+Fazer com que a planilha só abra em 1 computador
+E já que o negócio é segurança vamos complicar ainda mais para os xeretas. 
+Com o código abaixo a sua planilha só vai poder ser aberta no computador especificado. 
+Não tem prazo ou qualquer outro tipo de validação, apenas o nome da máquina. 
+Ahh, e claro que você pode mesclar com o código de exclusão, por exemplo.
+Para usufruir da verificação de máquina no Excel cole o seguinte código no Módulo
+
+Public Sub Verificar()
+     
+   Dim CompName As String
+
+   CompName = Environ$("ComputerName")
+
+'Aqui você irá colocar o nome da máquina autorizada
+      If CompName <> "PC_Max" Then 
+
+'Mensagem de erro exibida se o nome não bater
+        MsgBox "Este computador não tem direito de executar esta aplicação."
+        ActiveWorkbook.Close SaveChanges:=False
+
+      End If
+
+End Sub

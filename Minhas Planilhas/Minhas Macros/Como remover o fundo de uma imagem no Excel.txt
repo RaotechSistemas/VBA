@@ -1,0 +1,22 @@
+Como remover o fundo de uma imagem no Excel
+
+
+Você já viu muita coisa "bizarra" por aqui: Como inserir gifs em uma planilha, como listar os arquivos de uma pasta no Excel, 
+como criar uma tela de login, entre outras tantas maluquices. E a aula de hoje é digna de entrar nesse roll:
+Como remover o fundo de uma imagem no Excel. Sim, juro que é no Excel, e não no Photoshop.
+Para fazer o tutorial vamos pegar uma imagem com um fundo simples, não vamos exagerar e pegar uma imagem muita complexa, certo? 
+Afinal ainda estamos falando de um programa de planilhas e não de um programa de edição de imagens.
+A bola da vez foi:
+Para começar importar a imagem para o programa através da guia "Inserir", botão "Imagens". Selecione o arquivo, clique em "inserir" e pronto.
+Veja que quando você seleciona uma imagem dentro do Excel ele mostra uma guia até então oculta, a guia "Formatar". 
+Ela contém uma série de recursos exclusivos, entre eles o nosso alvo, o "Remover Plano de Fundo". Clique nele.
+Veja que o Excel vai inspecionar a imagem e marcar automaticamente o que ele considera como sendo o fundo. 
+Tudo que estiver rosa será removido. Caso sua imagem seja simples e tenha cores sólidas, por exemplo, ele irá fazer o trabalho de primeira.
+
+Como no caso da peixinha Dory há diversos tons de azul confundindo tudo o Excel acabou marcando pontos que não devia.
+Se estiver tudo certo e você concordar com o fundo selecionado clique em "Manter Alterações" e pronto, fundo removido. 
+Mas como esse não é nosso caso, temos 2 opções: "Marcar Áreas para Remover" ou "Marcar Áreas para Manter".
+Como no caso da Dory havia poucas partes que ele tinha identificado como fundo por engano, foi mais fácil selecionar o 
+Marcar Áreas para Manter e com o mouse clicar onde estava errado. Em menos de 5 cliques já estava tudo como eu queria:
+Agora sim é só clicar em "Manter alterações" ou for da própria imagem e pronto (veja que o marcador de célula está atrás dela):
+Depois é só deixar a imaginação solta e criar algumas coisas. Dá até pra mesclar esta imagem que removemos o fundo com uma outra e fazer uma composição:

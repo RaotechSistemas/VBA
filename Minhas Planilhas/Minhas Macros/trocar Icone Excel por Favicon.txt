@@ -1,0 +1,84 @@
+1. Criar módulo 1 - Onde ficarão armazenadas as instruções de API's
+
+Inserir no Módulo 1
+
+Option Explicit
+
+'As instruções abaixo contêm as APIs e devem  estar em um MÓDULO separado das Rotinas
+
+Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" _
+(ByVal lpClassName As String, _
+ByVal lpWindowName As String) _
+As Long
+
+Declare PtrSafe Function SendMessage Lib "user32" _
+Alias "SendMessageA" _
+(ByVal hWnd As Long, _
+ByVal wMsg As Long, _
+ByVal wParam As Long, _
+lParam As Any) As Long
+
+Declare PtrSafe Function DrawMenuBar Lib "user32" (ByVal hWnd As Long) As Long
+
+Const WM_SETICON = &H80
+Const ICON_SMALL = 0&
+Const ICON_BIG = 1&
+
+Public Sub ChangeXLIcon(Optional ByVal hIcon As Long = 0&)
+Dim hWnd As Long
+Dim lngRet As Long
+'Get the handle of Excel application
+hWnd = FindWindow("XLMAIN", Application.Caption)
+lngRet = SendMessage(hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon)
+lngRet = SendMessage(hWnd, WM_SETICON, ICON_BIG, ByVal hIcon)
+lngRet = DrawMenuBar(hWnd)
+End Sub
+
+2 . Criar Módulo 2 - Onde ficarão as funções
+
+ Inserir no Módulo 2 
+
+Option Explicit
+
+
+Sub AlteraIconeExcel()
+    
+    MsgBox "Alterando o Icone do Excel"
+    
+    'Variavel False ou True
+    appScr True
+    
+    'Chama a API que altera o Icone que se encontra na Plan1
+    'Se alterar o Nome da Aba(Plan1) ou do Controle(Image1) tem de ajustar abaixo
+    Call ChangeXLIcon(Plan1.Image1.Picture.Handle)
+
+End Sub
+
+Sub DevolveIconePadraoExcel()
+    
+    MsgBox "Retornando ao Icone Padrão do Excel"
+    
+    'Variavel False ou True
+    appScr False
+    Call ChangeXLIcon
+    
+End Sub
+
+'Alterna entre Falso / Verdadeiro
+Sub appScr(OnOff As Boolean)
+    Application.DisplayFullScreen = OnOff
+End Sub
+
+3. Na Plan1 (se colocar em outra planilha, terá de indicar isso da Sub AlteraIconeExcel(), 
+abrir na Guia de pesquisa a aba Desenvolvedor, nos Controle ActiveX a opção 
+Controle de Imagem (Se tiver que mudar o nome, alterar na Sub AlteraIconeExcel() também.
+Clique no Modo Design e depoiscom o botão direito do mouse no Controle de Imagem (Image1),a 
+opção Propriedades. Na opção Picture, escolher um arquivo Favicon (.ico).
+OBS.: Outros formatos de imagem não funcionam.
+OBS.2: Site para criar Favicons (https://favicon.io/favicon-converter/)
+
+4. Criar um botão de Alterar Ícone e outro de Icone Padrão.
+
+5. No Alterar Ícone, com o botão direito, atribuir a macro "AlterariconeExcel" 
+
+6. No botão Ícone Padrão, com o botão direito, atribuir a macro "DevolverIconePadraoExcel"

@@ -1,0 +1,28 @@
+
+Alternando entre células determinadas
+
+Sabe quando você cria uma planilha de cadastro qualquer e tem diversas células a serem preenchidas?
+Com este código você poderá determinar que o Excel alterne entre as células definidas assim que o 
+usuário preencher o campo e der um enter. 
+Funciona assim: Digamos que seu formulário contenha as células A5, B8 e E9, após ele inserir o 
+valor em A5 e confirmar, o cursor irá automaticamente para a próxima célula editável, no caso, B8.
+Continua confuso? Não se preocupe, pois depois do código a ser inserido diretamente na planilha
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+
+   On Error GoTo z
+   Application.EnableEvents = False If Not Intersect(Target, Range("célula onde o usuário irá inserir o valor")) Is Nothing Then [próxima célula onde o Excel irá automaticamente].Activate
+
+   End If Continue:
+   Application.EnableEvents = True
+   Exit Sub
+   z:
+   MsgBox Err.Description
+   Resume Continue
+
+End Sub
+
+Na prática é só você repetir a parte abaixo para cada célula a ser alternada automaticamente:
+
+If Not Intersect(Target, Range("célula onde o usuário irá inserir o valor")) Is Nothing Then
+[próxima célula onde o Excel irá automaticamente].Activate

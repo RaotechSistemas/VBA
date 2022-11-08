@@ -1,0 +1,33 @@
+Passando dados do Pdf para Excel sem perder a formatação
+
+Hoje temos uma dica muito simples, mas que pode te poupar horas de trabalho chato e cansativo. 
+Um dos formatos mais populares para envio de documentos e relatórios prontos é o formato Pdf do Adobe, 
+e se você trabalha muito com estes relatórios e este tipo de formato, certamente já se viu na situação 
+de ter de digitar manualmente no Excel uma tabela inteirinha, que está pronta no pdf, por não conseguir 
+fazer uma simples cópia e colar sem perder a formatação.
+Terrível isso, certo? Horas inteiras de produtividade perdidas por causa deste detalhe de formatos. 
+Mas não mais, agora você conseguirá facilmente passar suas tabelas para o Excel, perfeitamente divididas 
+em colunas e linhas, assim como no arquivo original.
+Para a aula usaremos como exemplo este documento em pdf.
+
+Ok, nosso exemplo possui poucas linhas e colunas que poderiam em alguns minutos serem digitadas no Excel, 
+mas e se fosse aquele relatório financeiro semestral de mais de 40 páginas da sua empresa? Quantos dias você levaria? 
+Bom, para fazer isso em questão de minutos faça o seguinte:
+No arquivo em pdf clique com o botão direito e escolha a "Ferramenta Selecionar" e com o mouse selecione 
+(com o perdão da redundância) o conteúdo a ser convertido para o Excel e então o copie.
+
+Agora abra um documento em branco no Word e cole o que fora copiado no pdf. Veja como fica:
+
+Pronto, estamos quase lá, agora selecione novamente todo esse conteúdo e clique em "Inserir", 
+"Tabela" e por fim "Converter Texto em Tabela..."
+
+Atualização do dia 21/10/2015: Alguns usuarios não conseguem realizar o passo acima em determinadas versões do Word. 
+Então segue um novo modo de executar este passo:
+Com os dados colados no seu Word e dispostos em coluna vá igualmente em "Inserir", "Tabela",porém, acesse a opção "Desenhar tabela". 
+Veja que umas linhas tracejadas aparecerão nos locais onde você pode colocar uma linha. 
+Clique em um ponto desta linha e arraste até o final para fazer a linha desejada. 
+Pronto, agora é só seguir o restinho do tutorial, normalmente.
+
+Agora é só copiar o que está no Word e colar no Excel. Veja como vai ficar:
+Pronto, agora é só editar da forma que você desejar, transformando as informações em gráficos, aplicando funções, criando tabelas dinâmicas, etc.
+Por hoje é só.

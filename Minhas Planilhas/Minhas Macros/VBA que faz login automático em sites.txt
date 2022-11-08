@@ -1,0 +1,41 @@
+
+VBA que faz login automático em sites
+
+Com esse código você vai aprender a criar uma planilha que faz login automaticamente em qualquer site. 
+Esse recurso pode ser útil para você mesclar, por exemplo, com o recurso de importar dados da web diretamente para o Excel.
+O código a seguir será colado em um módulo, mas antes temos que adicionar uma biblioteca suplementar ao Excel.
+Para isso vamos abrir a janela de edição de códigos com o atalho alt + f11 e depois vá em 'Ferramentas' e 'Referências'. 
+Será aberta uma nova janela onde marcaremos a opção 'Microsoft Internet Controls' e a opção 'Microsoft HTML Object Library'. Dê um 'ok'.
+Agora insira o módulo e cole o seguinte código:
+
+Dim HTMLDoc As HTMLDocument
+Dim oBrowser As InternetExplorer
+
+Sub Login()
+
+   Dim oHTML_Element As IHTMLElement
+   Dim sURL As String
+   On Error GoTo Err_Clear
+      sURL = "site do login"
+   Set oBrowser = New InternetExplorer
+      oBrowser.Silent = True
+      oBrowser.timeout = 60
+      oBrowser.Navigate sURL
+      oBrowser.Visible = True
+
+Do
+Loop Until oBrowser.ReadyState = READYSTATE_COMPLETE
+
+   Set HTMLDoc = oBrowser.Document
+     HTMLDoc.all.id de Email.Value = "seu e-mail"
+     HTMLDoc.all.id de senha.Value = "sua senha"
+
+For Each oHTML_Element In HTMLDoc.getElementsByTagName("input")
+    If oHTML_Element.Type = "submit" Then oHTML_Element.Click: Exit For
+
+Next
+   Err_Clear:
+
+Resume Next
+
+End Sub

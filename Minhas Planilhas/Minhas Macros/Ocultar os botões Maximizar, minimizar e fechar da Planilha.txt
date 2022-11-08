@@ -1,0 +1,129 @@
+'OCULTA OS BOTÕES MINIMIZAR / MAXIMIZAR E FECHAR DA BARRA DO EXCEL
+'Fonte:https://ideiasnew.wordpress.com
+'Reformulado por Valderei Antunes
+'Canal Soluções em Excel + VBA
+'=============================================================================================================================
+
+
+'Sem as declarações abaixo as macros para retirar e repor os botões não funcionarão
+'Elas já estão com as declarações PtrSafe - office 64 bits
+
+Declare PtrSafe Function FindWindow32 Lib "user32" Alias "FindWindowA" _
+(ByVal lpClassName As Any, ByVal lpWindowName As Any) As Integer
+Declare PtrSafe Function GetWindowLong32 Lib "user32" Alias "GetWindowLongA" _
+(ByVal hWnd As Integer, ByVal nIndex As Integer) As Long
+Declare PtrSafe Function SetWindowLong32 Lib "user32" Alias "SetWindowLongA" _
+(ByVal hWnd As Integer, ByVal nIndex As Integer, _
+ByVal dwNewLong As Long) As Long
+
+Global Const GWL_STYLE = (-16)
+Global Const WS_SYSMENU = &H80000
+'=============================================================================================================================
+
+'Os dois próximos procedimentos, irão usar as API'S para ocultar a barra de status do Excel
+'Ocultar a barra de status da worksheet
+Sub RetiraXdaBarra()
+
+    Application.ScreenUpdating = False
+
+    Dim WindowStyle As Long
+    Dim hWnd As Integer
+    Dim WindowName As String
+    Dim result As Variant
+
+    WindowName = Application.Caption
+    hWnd = FindWindow32(0&, ByVal WindowName)
+    WindowStyle = GetWindowLong32(hWnd, GWL_STYLE)
+    WindowStyle = WindowStyle And (Not WS_SYSMENU)
+    result = SetWindowLong32(hWnd, GWL_STYLE, WindowStyle)
+
+    'Força a barra de títulos a se atualizar, Ocultando os Botões
+    Application.Caption = "OCULTAR TODOS OS BOTÕES"
+    ActiveWindow.Caption = "OCULTAR TODOS OS BOTÕES"
+    'Application.ScreenUpdating = True
+
+End Sub
+'=============================================================================================================================
+
+'PROCEDIMENTO PARA REPOR E RETIRAR O X DA BARRA DO EXCEL
+Sub RepoeXdaBarra()
+
+Application.ScreenUpdating = True
+Dim WindowStyle As Long
+Dim hWnd As Integer
+Dim WindowName As String
+Dim result As Variant
+
+WindowName = Application.Caption
+hWnd = FindWindow32(0&, ByVal WindowName)
+WindowStyle = GetWindowLong32(hWnd, GWL_STYLE)
+WindowStyle = WindowStyle Or WS_SYSMENU
+result = SetWindowLong32(hWnd, GWL_STYLE, WindowStyle)
+
+'Força a barra de títulos a se atualizar, Retornando os Botões
+Application.Caption = "OCULTAR TODOS OS BOTÕES"
+ActiveWindow.Caption = "OCULTAR TODOS OS BOTÕES"
+
+End Sub
+'=============================================================================================================================
+
+
+
+'PROCEDIMENTO PARA OCULTAR_TUDO E EXIBIR_TUDO
+Sub Ocultar_Tudo()
+
+    'Menu superior
+    Application.ExecuteExcel4Macro "show.toolbar(""ribbon"",false)"
+    'barra de Fórmulas
+    Application.DisplayFormulaBar = False
+    'barra de status
+    Application.DisplayStatusBar = False
+    'Cabeçalhos
+    ActiveWindow.DisplayHeadings = False
+    'Guias da planilha
+    ActiveWindow.DisplayWorkbookTabs = False
+    'Linhas de grade
+    ActiveWindow.DisplayGridlines = False
+    'barras horozontais
+    ActiveWindow.DisplayHorizontalScrollBar = False
+    'barras verticais
+    ActiveWindow.DisplayVerticalScrollBar = False
+    
+    With Application
+    .WindowState = xlMaximized
+    End With
+    
+    'Call RetiraXdaBarra
+
+End Sub
+'=============================================================================================================================
+
+
+Sub Mostrar_Tudo()
+
+    'Menu superior - As chamadas Ribbons
+    Application.ExecuteExcel4Macro "show.toolbar(""ribbon"",true)"
+    'barra de Fórmulas
+    Application.DisplayFormulaBar = True
+    'barra de status
+    Application.DisplayStatusBar = True
+    'Cabeçalhos
+    ActiveWindow.DisplayHeadings = True
+    'Guias da planilha
+    ActiveWindow.DisplayWorkbookTabs = True
+    'Linhas de grade
+    'ActiveWindow.DisplayGridlines = True
+    'barras horozontais
+    ActiveWindow.DisplayHorizontalScrollBar = True
+    'barras verticais
+    ActiveWindow.DisplayVerticalScrollBar = True
+    
+    With Application
+        .WindowState = xlMaximized
+    End With
+    
+    Call RepoeXdaBarra
+
+End Sub
+'=============================================================================================================================
+

@@ -1,0 +1,26 @@
+Prazo de validade da planilha
+
+Muito dos usos dos códigos VBA são para aumentar a segurança dos seus dados. 
+Um bom exemplo da programação no Excel para estes fins é este daqui.
+Com ele você poderá definir uma data limite para que o arquivo seja fique disponível. 
+Depois que o dia limite for atingido a planilha não abrirá. Fácil assim. 
+O código é bem simples e deve ser colado em EstaPasta_de_trabalho. 
+Repare para o campo onde você especifica a data limite e a mensagem a ser exibida se o arquivo tiver expirado.
+
+Private Sub Workbook_Open()
+
+Application.EnableCancelKey = xlDisabled
+Dim dt As Date
+
+'Escolha a data em a Pasta de Trabalho deverá expirar (ano, mês, dia)
+     
+dt = DateSerial(2017, 12, 31)
+
+ If Date >= dt Then
+     MsgBox "Esta Pasta de Trabalho expirou! Favor contatar o administrador."
+ 
+ ThisWorkbook.Close SaveChanges:=False
+
+  End If
+
+End Sub

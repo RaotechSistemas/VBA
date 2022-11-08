@@ -1,0 +1,280 @@
+Criando um calendário mensal ou anual
+Na verdade são 2 códigos.
+Um deles cria calendários mensais e outro cria um calendário anual. 
+Escolha o seu preferido e seja feliz.
+Para a versão anual o código a ser colado no módulo é esse:
+
+Option Explicit 
+    Sub CriarCalendario()
+    Dim lMonth As Long
+    Dim strMonth As String
+    Dim rStart As Range
+    Dim strAddress As String
+    Dim rCell As Range
+    Dim lDays As Long
+    Dim dDate As Date
+    Dim lPositionCell As Integer
+    Dim bEscreveData As Boolean
+    Dim lYear As Integer
+    Dim sYear As String
+
+'Solicita o Ano para montar o calendário
+    
+   sYear = InputBox("Informe o Ano para gerar o calendário:", "Criar Calendário", Year(Date))
+
+'Sai da rotina se não for informado um ano válido
+  
+   If (sYear = "" Or Not IsNumeric(sYear)) Then Exit Sub
+   lYear = CInt(sYear)
+
+'Adiciona uma nova Planilha para criar o calendário
+   Worksheets.Add
+   ActiveSheet.Name = "Calendário " & lYear
+                    'Ocultar as linhas de grade
+   ActiveWindow.DisplayGridlines = False
+                    'Formata as colunas
+   With Cells
+      .ColumnWidth = 6
+      .Font.Size = 8
+   End With
+
+'Cria o cabeçalho para os meses
+   For lMonth = 1 To 12 Step 3
+   Select Case lMonth
+       Case 1
+             Set rStart = Range("A1")
+       Case 4
+             Set rStart = Range("A9")
+        Case 7
+             Set rStart = Range("A17")
+        Case 10
+             Set rStart = Range("A25")
+   End Select
+
+   strMonth = MonthName(lMonth) 'Atribui o nome do mês na variável
+
+'Mescla, auto-preenche e alinha os blocos dos meses
+
+   With rStart
+      .Value = UCase(strMonth)
+      .HorizontalAlignment = xlCenter
+      .Interior.ColorIndex = 6
+      .Font.Bold = True
+   With .Range("A1:G1")
+      .Merge
+      .BorderAround LineStyle:=xlContinuous
+   End With
+
+'Preenche o cabeçalho dos dias da semana
+   For lDays = 1 To 7
+      .Cells(2, lDays).Value = UCase(WeekdayName(lDays, True))
+   Next lDays
+      .Range("A2:G2").BorderAround LineStyle:=xlContinuous 
+                      'Auto preenche demais meses ao lado
+       .Range("A1:G2").AutoFill Destination:=.Range("A1:U2")
+   End With
+   Next lMonth
+
+'Preenche os meses com seus respectivos dias
+   
+For lMonth = 1 To 12
+   strAddress = Choose(lMonth, "A3:G8", "H3:N8", "O3:U8", _
+            "A11:G16", "H11:N16", "O11:U16", _
+            "A19:G24", "H19:N24", "O19:U24", _
+            "A27:G32", "H27:N32", "O27:U32")
+    lDays = 0
+    lPositionCell = 0
+    bEscreveData = False
+    Range(strAddress).BorderAround LineStyle:=xlContinuous
+                       'Adiciona os dias
+    For Each rCell In Range(strAddress)
+    lDays = lDays + 1
+    lPositionCell = lPositionCell + 1
+    dDate = DateSerial(lYear, lMonth, lDays) 
+
+    If bEscreveData = False Then
+    If Weekday(dDate, vbSunday) = lPositionCell Then
+    bEscreveData = True
+  Else
+    bEscreveData = False
+   lDays = 0
+
+ End If
+ End If
+
+   If bEscreveData = True Then
+   If Month(dDate) = lMonth Then 'Se for uma data válida
+   With rCell
+        .Value = dDate
+        .NumberFormat = "dd"
+  End With
+
+End If
+End If
+
+   Next rCell
+   Next lMonth
+
+'Formatação condicional para o dia de hoje.
+
+   With Range("A1:U32")
+       .FormatConditions.Add Type:=xlCellValue, Operator:=xlEqual, Formula1:="=HOJE()"
+       .FormatConditions(1).Font.ColorIndex = 2
+       .FormatConditions(1).Interior.ColorIndex = 11
+       .HorizontalAlignment = xlCenter
+   End With
+
+End Sub
+
+'Se você quiser criar um calendário mensal o código a ser inserido em Esta_pasta_de_trabalho será esse:
+
+Sub CalendarioMensal()    
+
+   ActiveSheet.Protect DrawingObjects:=False, Contents:=False, _
+   Scenarios:=False
+   Application.ScreenUpdating = False
+   On Error GoTo MyErrorTrap
+   Range("a1:g14").Clear 
+   Dim MyInput, StartDay, DayofWeek, CurYear, CurMonth, FinalDay, cell, RowCell, ColCell, x
+'Esta será a área onde será inserido o calendário. Se você editar a área de inserção não esqueça de editar as células abaixo para não dar erro
+
+MyInput = InputBox("Digite o mês e o ano do seu calendário:" & vbCrLf & "" & vbCrLf & "www.AprenderExcel.com.br")
+    If MyInput = "" Then Exit Sub
+       StartDay = DateValue(MyInput)
+        If Day(StartDay) <> 1 Then
+        StartDay = DateValue(Month(StartDay) & "/1/" & _
+        Year(StartDay))
+    End If
+
+Range("a1").NumberFormat = "mmmm yyyy"
+
+With Range("a1:g1")
+    .HorizontalAlignment = xlCenterAcrossSelection
+    .VerticalAlignment = xlCenter
+    .Font.Size = 18
+    .Font.Bold = True
+    .RowHeight = 35
+End With
+
+With Range("a2:g2")
+    .ColumnWidth = 11
+    .VerticalAlignment = xlCenter
+    .HorizontalAlignment = xlCenter
+    .VerticalAlignment = xlCenter
+    .Orientation = xlHorizontal
+    .Font.Size = 12
+    .Font.Bold = True
+    .RowHeight = 20
+End With
+
+Range("a2") = "Domingo"
+Range("b2") = "Segunda"
+Range("c2") = "Terça"
+Range("d2") = "Quarta"
+Range("e2") = "Quinta"
+Range("f2") = "Sexta"
+Range("g2") = "Sábado"
+
+With Range("a3:g8")
+   .HorizontalAlignment = xlRight
+   .VerticalAlignment = xlTop
+   .Font.Size = 18
+   .Font.Bold = True
+   .RowHeight = 21
+End With
+
+Range("a1").Value = Application.Text(MyInput, "mmmm yyyy")
+DayofWeek = Weekday(StartDay)
+CurYear = Year(StartDay)
+CurMonth = Month(StartDay)
+FinalDay = DateSerial(CurYear, CurMonth + 1, 1)
+
+Select Case DayofWeek
+   Case 1
+   Range("a3").Value = 1
+   Case 2
+   Range("b3").Value = 1
+   Case 3
+   Range("c3").Value = 1
+   Case 4
+   Range("d3").Value = 1
+   Case 5
+   Range("e3").Value = 1
+   Case 6
+   Range("f3").Value = 1
+   Case 7
+   Range("g3").Value = 1
+End Select
+
+For Each cell In Range("a3:g8")
+   RowCell = cell.Row
+   ColCell = cell.Column
+     If cell.Column = 1 And cell.Row = 3 Then
+     ElseIf cell.Column <> 1 Then
+          If cell.Offset(0, -1).Value >= 1 Then
+            cell.Value = cell.Offset(0, -1).Value + 1
+               If cell.Value > (FinalDay - StartDay) Then
+               cell.Value = ""
+               Exit For
+           End If
+     End If
+   ElseIf cell.Row > 3 And cell.Column = 1 Then
+      cell.Value = cell.Offset(-1, 6).Value + 1
+         If cell.Value > (FinalDay - StartDay) Then
+         cell.Value = ""
+       Exit For
+    End If
+ End If
+Next
+
+For x = 0 To 5
+Range("A4").Offset(x * 2, 0).EntireRow.Insert
+     With Range("A4:G4").Offset(x * 2, 0)
+         .RowHeight = 65
+         .HorizontalAlignment = xlCenter
+         .VerticalAlignment = xlTop
+         .WrapText = True
+         .Font.Size = 10
+         .Font.Bold = False
+         .Locked = False
+      End With
+      With Range("A3").Offset(x * 2, 0).Resize(2, 7).Borders(xlLeft)
+         .Weight = xlThick
+         .ColorIndex = xlAutomatic
+      End With
+      With Range("A3").Offset(x * 2, 0).Resize(2, 7).Borders(xlRight)
+         .Weight = xlThick
+         .ColorIndex = xlAutomatic
+      End With
+
+Range("A3").Offset(x * 2, 0).Resize(2, 7).BorderAround _
+Weight:=xlThick, ColorIndex:=xlAutomatic
+Next
+      If Range("A13").Value = "" Then Range("A13").Offset(0, 0) _
+          .Resize(2, 8).EntireRow.Delete
+          ActiveWindow.DisplayGridlines = False
+
+' ActiveSheet.Protect DrawingObjects:=True, Contents:=True, _ Atenção: 
+
+' Se você quiser bloquear seu calendário contra edições é só apagar as aspas vermelhas no início dessa frase e na frase abaixo
+
+' Scenarios:=True
+ActiveWindow.WindowState = xlMaximized
+ActiveWindow.ScrollRow = 1
+Application.ScreenUpdating = True
+
+Exit Sub
+
+MyErrorTrap:
+    MsgBox "Provavelmente você não entrou os dados corretamente" _
+    & Chr(13) & "" _
+    & Chr(13) & "Digite o nome do mês" _
+    & " (você pode usar a abreviação de 3 letras)" _
+    & Chr(13) & "e 4 dígitos para o ano" _
+    & Chr(13) & "" _
+    & Chr(13) & "www.AprenderExcel.com.br"
+    MyInput = InputBox("Digite o mês e o ano")
+    If MyInput = "" Then Exit Sub
+Resume
+
+End Sub

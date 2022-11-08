@@ -1,0 +1,13 @@
+Bloqueando as VBAs e macros com senha no Excel
+
+Hoje vamos de tratar de um assunto recorrente aqui no Aprender Excel devido sua importância: segurança.
+Vamos aprender como bloquear as macros de uma planilha. Por exemplo, imagine a seguinte situação: 
+Você cria um código, implementa, cuida das arestas, garante a segurança e tudo mais, porém, algum 
+usuário mal-intencionado e que entende de programação aperta uma simples combinação de teclas (alt + f11) 
+e tem acesso a todo o seu código, podendo fazer o que quiser com ele. Inclusive removê-lo!                    
+Mas calma, temos a solução. Faça o seguinte. Após o código já estar inserido e tudo prontinho, 
+ainda na janela de edição de códigos, vá na guia "Ferramentas" e depois em "Propriedades de VBAProject..."    
+Uma nova janela será aberta. Vá na guia "Proteção" e marque a caixinha "Bloquear projeto para exibição". 
+Insira e confirme senha e pronto. Dê um ok. 
+Pronto, a partir de agora, sempre que alguém pegar sua planilha e tentar visualizar o código ira ver uma tela sem nada. 
+Ao clicar no explorador de arquivos irá precisar informar a senha para ter acesso aos arquivos:

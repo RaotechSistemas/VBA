@@ -1,0 +1,106 @@
+'FUNÇÃO SAIR - SALVA E FECHA A WORKBOOK ATIVA
+
+Sub Sair()
+resposta = MsgBox("Deseja Fechar o Programa?", vbYesNo, "Atenção")
+If resposta = vbYes Then
+    Application.DisplayAlerts = False
+    'ThisWorkbook.NoEvents = True
+    MsgBox "Arquivos salvos com sucesso"
+    ActiveWorkbook.Save
+    Application.Quit
+End If
+If resposta = vbNo Then
+MsgBox ("Processo cancelado pelo usuário!")
+End If
+End Sub
+
+
+'FUNÇÃO QUE OCULTA O BOTÃO FECHAR DOS USERFORMS (FORMULÁRIOS)
+
+'Função que retornará um identificador para o UserForm que possui o nome da classe e o nome do UserForm
+Private Declare PtrSafe Function FindWindowA Lib "user32" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+
+'Função que recupera as informações sobre o nome da classe e o estilo da janela do UserForm
+Private Declare PtrSafe Function GetWindowLongA Lib "user32" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
+
+'Função que altera o estilo da janela do UserForm
+Private Declare PtrSafe Function SetWindowLongA Lib "user32" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+
+'Função que redesenha a barra de título do UserForm
+Private Declare PtrSafe Function DrawMenuBar Lib "user32" (ByVal hWnd As Long) As Long
+
+Sub RemoveBotao(ObjForm As Object)
+
+    'Código que remove o botão Fechar do UserForm
+    SetWindowLongA FindWindowA("ThunderDFrame", ObjForm.Caption), -16, GetWindowLongA(FindWindowA("ThunderDFrame", ObjForm.Caption), -16) And &HFFF7FFFF
+
+    'Código que atualiza a barra de título do UserForm sem o botão Fechar
+    DrawMenuBar FindWindowA("ThunderDFrame", ObjForm.Caption)
+
+End Sub
+
+'CONTROLE DE TELA CHEIA ON/OFF
+
+Sub TelaCheia_On()
+Call DesativarAtualizações
+ActiveSheet.Unprotect ("e7") 'desbloqueia a planilha ativa com senha
+'Oculta todos os Menus (Ribbons)
+With Application
+    .ScreenUpdating = False
+    .EnableEvents = False
+    .ExecuteExcel4Macro "SHOW.TOOLBAR(""Ribbon"",False)"
+    .DisplayFormulaBar = False
+    .DisplayStatusBar = False
+    .Caption = "-----4MED - System for Clinicals-----" 'muda o nome da planilha ativa
+With ActiveWindow
+    .DisplayHorizontalScrollBar = False
+    .DisplayVerticalScrollBar = False
+    .DisplayWorkbookTabs = False
+    .DisplayHeadings = False
+    .DisplayGridlines = False
+End With
+    .ScreenUpdating = True
+    .EnableEvents = True
+End With
+ActiveSheet.Protect ("e7") 'bloqueia a planilha ativa com senha
+Call AtivarAtualizações
+End Sub
+
+Sub TelaCheia_Off()
+Call DesativarAtualizações
+'Exibe todos os Menus (Ribbons)
+With Application
+    .ScreenUpdating = False
+    .EnableEvents = False
+    .ExecuteExcel4Macro "SHOW.TOOLBAR(""Ribbon"",True)"
+    .DisplayFormulaBar = True
+    .DisplayStatusBar = True
+    .Caption = "------Sistema em Manutenção------"
+With ActiveWindow
+    .DisplayHorizontalScrollBar = True
+    .DisplayVerticalScrollBar = True
+    .DisplayWorkbookTabs = True
+    .DisplayHeadings = True
+    .DisplayGridlines = True
+End With
+.ScreenUpdating = True
+.EnableEvents = True
+End With
+ActiveSheet.Unprotect ("e7") 'desbloqueia a planilha ativa
+Application.ScreenUpdating = True  'Habilita atualização de tela
+Application.DisplayStatusBar = True 'Habilita atualização de barra de status
+End Sub
+
+'CONTROLES DE ATIVAR/DESATIVAR ATUALIZAÇÕES
+
+Public Sub DesativarAtualizações()
+Application.DisplayStatusBar = False 'Desabilita atualização de barra de status
+Application.ScreenUpdating = False 'Desabilita atualização de tela
+ActiveWorkbook.Unprotect ("e7") 'Desbloqueia a pasta de Trabalho Ativa
+End Sub
+
+Public Sub AtivarAtualizações()
+ActiveWorkbook.Protect ("e7") 'Bloqueia a pasta de trabalho Ativa
+Application.ScreenUpdating = True  'Habilita atualização de tela
+Application.DisplayStatusBar = True 'Habilita atualização de barra de status
+End Sub

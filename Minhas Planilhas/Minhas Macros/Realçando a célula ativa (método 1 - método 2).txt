@@ -1,0 +1,65 @@
+Realçando a célula ativa (método 1 - método 2)
+
+Você é daqueles que costumam criar relatórios imensos, mantém e edita planilha enormes e repleta de dados, 
+que tem incontáveis células preenchidas, etc ? Por isso você precisa ir e vir, subir e descer na planilha 
+procurando a célula certa e quando vê já está perdido? Já nem sabe mais aonde está o cursor?
+Então essa aula é para você. Temos 2 métodos que nunca mais vão deixar você se perder por entre os dados.
+O primeiro deles deve ser inserido diretamente no código da planilha
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Excel.Range)
+    
+'*** Definição de variáveis ***
+   
+h = ActiveCell.Height
+w2 = ActiveCell.Width
+t = ActiveCell.Top
+w = ActiveCell.Left
+
+'Testa se os retangulos shapes são existentes.
+
+  On Error Resume Next
+  ActiveSheet.Shapes("RectangleV").Delete
+  On Error Resume Next
+
+ActiveSheet.Shapes("RectangleH").Delete
+
+'Ajuste dos shapes retangulos
+
+ActiveSheet.Shapes.AddShape(msoShapeRectangle, 0, t, w, h).Name = "RectangleV"
+
+  With ActiveSheet.Shapes("RectangleV")
+     .Fill.Visible = msoFalse
+     .Fill.Transparency = 20#
+     .Line.Weight = 2#
+     .Line.ForeColor.SchemeColor = 10
+     .PrintObject = False
+  End With
+
+ActiveSheet.Shapes.AddShape(msoShapeRectangle, w, 0, w2, t).Name = "RectangleH"
+
+  With ActiveSheet.Shapes("RectangleH")
+     .Fill.Visible = msoFalse
+     .Fill.Transparency = 20#
+     .Line.Weight = 2#
+     .Line.ForeColor.SchemeColor = 10
+   End With
+
+End Sub
+
+Já o segundo método (que eu acho melhor) também deve ser colado diretamente no código da planilha e é este daqui:
+
+Dim lTarget As Range
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+   
+If Not lTarget Is Nothing Then
+
+   lTarget.Interior.ColorIndex = 0
+   
+End If
+
+Target.Interior.ColorIndex = 6
+
+Set lTarget = Target
+
+End Sub
